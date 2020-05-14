@@ -36,8 +36,7 @@ export class AppComponent implements OnInit {
     });
 
     this.apiService.OnDeleteTodoListener.subscribe(evt => {
-      const data = (evt as any).value.data.onDeleteTodo;
-      this.todos = [...this.todos, data];
+      this.todos = [...this.todos];
     });
   }
 }
