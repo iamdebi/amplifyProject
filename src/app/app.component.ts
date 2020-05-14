@@ -19,6 +19,12 @@ export class AppComponent implements OnInit {
     });
   }
 
+  deleteToDo(id) {
+    this.apiService.DeleteTodo({
+      id: id
+    });
+  }
+
   async ngOnInit() {
     this.apiService.ListTodos().then(evt => {
       this.todos = evt.items;
@@ -26,6 +32,11 @@ export class AppComponent implements OnInit {
 
     this.apiService.OnCreateTodoListener.subscribe(evt => {
       const data = (evt as any).value.data.onCreateTodo;
+      this.todos = [...this.todos, data];
+    });
+
+    this.apiService.OnDeleteTodoListener.subscribe(evt => {
+      const data = (evt as any).value.data.onDeleteTodo;
       this.todos = [...this.todos, data];
     });
   }
